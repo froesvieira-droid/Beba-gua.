@@ -1,0 +1,5 @@
+{
+  "name": "AquaReminder - Hidratação Inteligente",
+  "description": "Um assistente pessoal de hidratação que calcula sua meta diária de água com base no seu perfil e te lembra de beber água regularmente.",
+  "requestFramePermissions": ["geolocation"]
+}
