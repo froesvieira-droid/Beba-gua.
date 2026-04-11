@@ -17,6 +17,30 @@
   --brand-accent: #f59e0b;
 }
 
+.theme-blue {
+  --brand-primary: #3b82f6;
+  --brand-secondary: #06b6d4;
+  --brand-accent: #f59e0b;
+}
+
+.theme-emerald {
+  --brand-primary: #10b981;
+  --brand-secondary: #34d399;
+  --brand-accent: #f59e0b;
+}
+
+.theme-rose {
+  --brand-primary: #f43f5e;
+  --brand-secondary: #fb7185;
+  --brand-accent: #f59e0b;
+}
+
+.theme-violet {
+  --brand-primary: #8b5cf6;
+  --brand-secondary: #a78bfa;
+  --brand-accent: #f59e0b;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", sans-serif;

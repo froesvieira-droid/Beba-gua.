@@ -9,6 +9,7 @@ export interface UserProfile {
   wakeTime: string; // HH:mm
   sleepTime: string; // HH:mm
   customReminderTimes: string[]; // ["HH:mm", ...]
+  theme: string; // 'blue' | 'emerald' | 'rose' | 'violet'
 }
 
 export interface WaterLog {

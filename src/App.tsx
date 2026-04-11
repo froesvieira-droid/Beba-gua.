@@ -225,6 +225,7 @@ export default function App() {
       wakeTime: '07:00',
       sleepTime: '22:00',
       customReminderTimes: [],
+      theme: 'blue',
       ...data as UserProfile
     };
     setProfile(newProfile);
@@ -252,6 +253,7 @@ export default function App() {
     const [newTime, setNewTime] = useState('10:00');
     const [isManualGoal, setIsManualGoal] = useState(!!initialData?.dailyGoal);
     const [manualGoal, setManualGoal] = useState(initialData?.dailyGoal || 2000);
+    const [theme, setTheme] = useState(initialData?.theme || 'blue');
 
     const calculatedGoal = useMemo(() => calculateDailyGoal(weight, height, gender), [weight, height, gender]);
 
@@ -273,7 +275,7 @@ export default function App() {
               type="number"
               value={weight}
               onChange={(e) => setWeight(Number(e.target.value))}
-              className="w-full bg-white/50 border border-white/60 rounded-2xl px-5 py-4 text-slate-800 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none transition-all"
+              className="w-full bg-white/50 border border-white/60 rounded-2xl px-5 py-4 text-slate-800 font-bold focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
               required
             />
           </div>
@@ -283,7 +285,7 @@ export default function App() {
               type="number"
               value={height}
               onChange={(e) => setHeight(Number(e.target.value))}
-              className="w-full bg-white/50 border border-white/60 rounded-2xl px-5 py-4 text-slate-800 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none transition-all"
+              className="w-full bg-white/50 border border-white/60 rounded-2xl px-5 py-4 text-slate-800 font-bold focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
               required
             />
           </div>
@@ -299,7 +301,7 @@ export default function App() {
                 onClick={() => setGender(g)}
                 className={`py-4 rounded-2xl font-bold transition-all border ${
                   gender === g 
-                    ? 'bg-blue-500 text-white border-blue-500 shadow-lg shadow-blue-200' 
+                    ? 'bg-brand-primary text-white border-brand-primary shadow-lg shadow-brand-primary/20' 
                     : 'bg-white/50 text-slate-600 border-white/60 hover:bg-white/80'
                 }`}
               >
@@ -309,7 +311,23 @@ export default function App() {
           </div>
         </div>
 
-        <div className="space-y-4 p-6 bg-blue-50/50 rounded-[2rem] border border-blue-100/50">
+        <div className="space-y-3">
+          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Tema</label>
+          <div className="grid grid-cols-4 gap-2">
+            {['blue', 'emerald', 'rose', 'violet'].map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setTheme(t)}
+                className={`h-12 rounded-2xl transition-all border-2 ${
+                  theme === t ? 'border-brand-primary scale-105' : 'border-transparent'
+                } bg-${t === 'blue' ? 'blue' : t === 'emerald' ? 'emerald' : t === 'rose' ? 'rose' : 'violet'}-500`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-4 p-6 bg-brand-primary/10 rounded-[2rem] border border-brand-primary/20">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <label className="text-sm font-bold text-slate-700">Meta Diária</label>
@@ -320,7 +338,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setIsManualGoal(!isManualGoal)}
-              className={`w-12 h-6 rounded-full transition-colors relative ${isManualGoal ? 'bg-blue-500' : 'bg-slate-300'}`}
+              className={`w-12 h-6 rounded-full transition-colors relative ${isManualGoal ? 'bg-brand-primary' : 'bg-slate-300'}`}
             >
               <motion.div 
                 animate={{ x: isManualGoal ? 26 : 2 }}
@@ -334,15 +352,15 @@ export default function App() {
                 type="number"
                 value={manualGoal}
                 onChange={(e) => setManualGoal(Number(e.target.value))}
-                className="w-full bg-white border border-blue-100 rounded-2xl px-5 py-4 text-blue-700 font-display font-bold text-xl outline-none"
+                className="w-full bg-white border border-brand-primary/20 rounded-2xl px-5 py-4 text-brand-primary font-display font-bold text-xl outline-none"
                 placeholder="Ex: 2500"
               />
-              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-blue-300 font-bold">ml</span>
+              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-brand-primary font-bold">ml</span>
             </motion.div>
           ) : (
-            <div className="p-4 bg-white/60 rounded-2xl flex justify-between items-center border border-blue-100/50">
-              <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">Sugerida</span>
-              <span className="text-2xl font-display font-bold text-blue-600">{calculatedGoal}ml</span>
+            <div className="p-4 bg-white/60 rounded-2xl flex justify-between items-center border border-brand-primary/20">
+              <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">Sugerida</span>
+              <span className="text-2xl font-display font-bold text-brand-primary">{calculatedGoal}ml</span>
             </div>
           )}
         </div>
@@ -431,9 +449,10 @@ export default function App() {
             sleepTime, 
             reminderInterval: interval,
             customReminderTimes: customTimes,
-            dailyGoal: isManualGoal ? manualGoal : calculatedGoal
+            dailyGoal: isManualGoal ? manualGoal : calculatedGoal,
+            theme
           })}
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-5 rounded-[2rem] font-display font-bold text-lg shadow-xl shadow-blue-200 hover:shadow-blue-300 transition-all active:scale-[0.98] flex items-center justify-center gap-3"
+          className="w-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white py-5 rounded-[2rem] font-display font-bold text-lg shadow-xl shadow-brand-primary/20 hover:shadow-brand-primary/40 transition-all active:scale-[0.98] flex items-center justify-center gap-3"
         >
           {initialData ? 'Salvar Alterações' : 'Começar Agora'}
           <ArrowRight size={20} />
@@ -465,7 +484,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
+    <div className={`min-h-screen font-sans selection:bg-brand-primary/20 selection:text-brand-primary theme-${profile?.theme || 'blue'}`}>
       <BackgroundBlobs />
       
       {/* Header */}
@@ -562,7 +581,7 @@ export default function App() {
             {/* Quick Add Section */}
             <section className="space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 ml-6">Adicionar Rápido</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                 {DEFAULT_GLASS_SIZES.map((size, idx) => (
                   <motion.button
                     key={size}
@@ -574,7 +593,7 @@ export default function App() {
                     onClick={() => addWater(size)}
                     className="glass p-5 rounded-[2rem] flex flex-col items-center gap-3 group transition-all hover:bg-white/80 border-white/60"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-2xl bg-brand-primary/10 flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors text-brand-primary">
                       {size <= 200 ? <Droplets className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
                     </div>
                     <div className="text-center">
@@ -583,6 +602,28 @@ export default function App() {
                     </div>
                   </motion.button>
                 ))}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 }}
+                  className="glass p-5 rounded-[2rem] flex flex-col items-center gap-3 border-white/60"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400">
+                    <Plus className="w-6 h-6" />
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="ml"
+                    className="w-full bg-transparent text-center font-bold text-slate-800 outline-none text-lg placeholder:text-slate-300"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        const val = parseInt(e.currentTarget.value);
+                        if (!isNaN(val) && val > 0) addWater(val);
+                        e.currentTarget.value = '';
+                      }
+                    }}
+                  />
+                </motion.div>
               </div>
             </section>
           </div>
