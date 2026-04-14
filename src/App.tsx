@@ -264,7 +264,7 @@ export default function App() {
         className="glass rounded-[3rem] p-10 space-y-8 max-h-[80vh] overflow-y-auto custom-scrollbar shadow-2xl border-white/60"
       >
         <div className="text-center space-y-2 mb-4">
-          <h2 className="text-3xl font-display font-bold text-slate-900">Seu Perfil</h2>
+          <h2 className="text-2xl font-display font-bold text-slate-900">Seu Perfil</h2>
           <p className="text-sm text-slate-400 font-medium">Personalize sua experiência de hidratação</p>
         </div>
 
@@ -360,7 +360,7 @@ export default function App() {
           ) : (
             <div className="p-4 bg-white/60 rounded-2xl flex justify-between items-center border border-brand-primary/20">
               <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">Sugerida</span>
-              <span className="text-2xl font-display font-bold text-brand-primary">{calculatedGoal}ml</span>
+              <span className="text-xl font-display font-bold text-brand-primary">{calculatedGoal}ml</span>
             </div>
           )}
         </div>
@@ -538,14 +538,14 @@ export default function App() {
               <div className="relative z-10 space-y-8">
                 <div className="flex justify-between items-start">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500/80">Progresso Diário</span>
-                    <h2 className="text-4xl font-display font-bold text-slate-900">
-                      {totalDrunk} <span className="text-lg font-medium text-slate-400">ml</span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-blue-500/80">Progresso Diário</span>
+                    <h2 className="text-2xl font-display font-bold text-slate-900">
+                      {totalDrunk} <span className="text-base font-medium text-slate-400">ml</span>
                     </h2>
                   </div>
                   <div className="text-right space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Meta</span>
-                    <p className="text-xl font-display font-semibold text-slate-700">{baseGoal}ml</p>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Meta</span>
+                    <p className="text-lg font-display font-semibold text-slate-700">{baseGoal}ml</p>
                   </div>
                 </div>
 
@@ -581,7 +581,7 @@ export default function App() {
             {/* Quick Add Section */}
             <section className="space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 ml-6">Adicionar Rápido</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {DEFAULT_GLASS_SIZES.map((size, idx) => (
                   <motion.button
                     key={size}
@@ -602,28 +602,6 @@ export default function App() {
                     </div>
                   </motion.button>
                 ))}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 }}
-                  className="glass p-5 rounded-[2rem] flex flex-col items-center gap-3 border-white/60"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400">
-                    <Plus className="w-6 h-6" />
-                  </div>
-                  <input
-                    type="number"
-                    placeholder="ml"
-                    className="w-full bg-transparent text-center font-bold text-slate-800 outline-none text-lg placeholder:text-slate-300"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        const val = parseInt(e.currentTarget.value);
-                        if (!isNaN(val) && val > 0) addWater(val);
-                        e.currentTarget.value = '';
-                      }
-                    }}
-                  />
-                </motion.div>
               </div>
             </section>
           </div>
@@ -714,7 +692,7 @@ export default function App() {
             >
               <div className="flex justify-between items-center mb-8">
                 <div className="space-y-1">
-                  <h2 className="text-2xl font-display font-bold text-slate-900">Histórico</h2>
+                  <h2 className="text-xl font-display font-bold text-slate-900">Histórico</h2>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Registros de hoje</p>
                 </div>
                 <button 
@@ -781,7 +759,7 @@ export default function App() {
             >
               <div className="flex justify-between items-center mb-10">
                 <div className="space-y-1">
-                  <h2 className="text-3xl font-display font-bold text-slate-900">Estatísticas</h2>
+                  <h2 className="text-2xl font-display font-bold text-slate-900">Estatísticas</h2>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Análise de consumo</p>
                 </div>
                 <button 
